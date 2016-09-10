@@ -1,0 +1,8 @@
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\bin\Release\Pomodoro.exe.config
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\bin\Release\Pomodoro.exe
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\bin\Release\Pomodoro.pdb
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.Replics.resources
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.Signs.resources
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.csproj.GenerateResource.Cache
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.exe
+C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.pdb
