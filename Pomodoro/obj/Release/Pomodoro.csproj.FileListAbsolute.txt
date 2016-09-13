@@ -6,3 +6,6 @@ C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Releas
 C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.csproj.GenerateResource.Cache
 C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.exe
 C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Release\Pomodoro.pdb
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\bin\Release\Pomodoro.exe.config
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.exe
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.pdb
