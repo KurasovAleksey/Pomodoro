@@ -6,3 +6,12 @@ C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Debug\
 C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Debug\Pomodoro.Replics.resources
 C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Debug\Pomodoro.csproj.GenerateResource.Cache
 C:\Users\Ivan\Documents\Visual Studio 2012\Projects\Pomodoro\Pomodoro\obj\Debug\Pomodoro.Signs.resources
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\bin\Debug\Pomodoro.exe.config
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Debug\Pomodoro.exe
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Debug\Pomodoro.pdb
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Debug\Pomodoro.csprojResolveAssemblyReference.cache
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Debug\Pomodoro.Replics.resources
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Debug\Pomodoro.Signs.resources
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Debug\Pomodoro.csproj.GenerateResource.Cache
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\bin\Debug\Pomodoro.exe
+G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\bin\Debug\Pomodoro.pdb

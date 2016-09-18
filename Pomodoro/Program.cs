@@ -9,11 +9,17 @@ using System.IO;
 using System.Resources;
 using System.Reflection;
 
+using System.Windows.Forms;
+
 namespace Pomodoro
 {
     class Program
     {
-        static object blocker = new object();
+        #region Variables
+
+        static TimeSpan time = new TimeSpan(0, 0, 0);
+
+        static StringBuilder sb = new StringBuilder();
 
         static volatile bool isClocking = false;
         static volatile bool isPause = false;
@@ -21,20 +27,23 @@ namespace Pomodoro
         static volatile bool isGoingToExit = false;
         static volatile bool isReadPrinciples = false;
         static volatile bool isWorkTime = true;
+        static volatile bool isBigBreak = false;
 
         static Thread listener = new Thread(Listener);
         static Thread breaker = new Thread(Breaker);
-        static DateTime time = new DateTime();
-        static volatile System.Timers.Timer timer;
+        static Thread clocker = new Thread(Clock);
+        static DateTime lastTime;
 
         static string strGreeting;
         static string strClockingGo;
         static string strClockingPause;
         static string strPrinciples;
-        static string strGointToExit;
+        static string strGoingToExit;
 
+        static int breakTimeMinute;
         static int workTimeMinute = 25;
-        static int breakTimeMinute = 5;
+        static int shortBreakTimeMinute = 5;
+        static int bigBreakTimeMinute = 30;
         static int breakCounter = 0;
 
         static int frequency = 4000;
@@ -42,6 +51,9 @@ namespace Pomodoro
         static ConsoleColor conColor = ConsoleColor.Red;
 
         static string[][] signs = new string[11][];
+        static List<int> list;
+
+        #endregion
 
         static void LoadSigns()
         {
@@ -54,8 +66,8 @@ namespace Pomodoro
 
         static string GetTimeAsString(int minutes, int seconds)
         {
-            StringBuilder sb = new StringBuilder();
-            List<int> list = new List<int>(5) { minutes / 10, minutes % 10, 10, seconds / 10, seconds % 10 };
+            sb.Clear();
+            list = new List<int>(5) { minutes / 10, minutes % 10, 10, seconds / 10, seconds % 10 };
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < list.Count; j++)
@@ -64,18 +76,7 @@ namespace Pomodoro
             }
             return sb.ToString();
         }
-
-        //static void LoadStrings()
-        //{
-        //    string[] replics = File.ReadAllText("Replics.txt")
-        //        .Split(new string[]{ "@\r\n" }, StringSplitOptions.None);
-        //    strGreeting = replics[0];
-        //    strClockingGo = replics[1];
-        //    strClockingPause = replics[2];
-        //    strPrinciples = replics[3];
-        //    strGointToExit = replics[4];
-        //}
-
+       
         static void LoadStrings()
         {
             var rm = new ResourceManager("Pomodoro.Replics", Assembly.GetExecutingAssembly());
@@ -83,7 +84,22 @@ namespace Pomodoro
             strClockingGo = rm.GetString("ClockingGo");
             strClockingPause = rm.GetString("ClockingPause");
             strPrinciples = rm.GetString("Info");
-            strGointToExit = rm.GetString("GoingToExit");
+            strGoingToExit = rm.GetString("GoingToExit");
+        }
+
+        static void Clock()
+        {
+            while (true)
+            {
+                if (isClocking && !isPause)
+                {
+                    DateTime dt = DateTime.Now;
+                    time += (dt - lastTime);
+                    lastTime = dt;
+                    Thread.Sleep(500);
+                    UpdateText();
+                }
+            }
         }
 
         static void Breaker()
@@ -94,25 +110,30 @@ namespace Pomodoro
                 {
                     if (isWorkTime)
                     {
-                        if (time.Minute >= workTimeMinute)
+                        if (time.Minutes >= workTimeMinute)
                         {
                             conColor = ConsoleColor.Green;
-                            time = new DateTime();
+                            time = new TimeSpan(0, 0, 0);
                             isWorkTime = false;
                             breakCounter++;
                             if (breakCounter > 4)
                             {
-                                breakTimeMinute = 20;
+                                isBigBreak = true;
+                                breakTimeMinute = bigBreakTimeMinute;
                                 breakCounter = 0;
                             }
-                            else breakTimeMinute = 5;
+                            else
+                            {
+                                isBigBreak = false;
+                                breakTimeMinute = shortBreakTimeMinute;
+                            }
                             Console.Beep(frequency, duration);
                         }
                     }
-                    else if (time.Minute >= breakTimeMinute)
+                    else if (time.Minutes >= breakTimeMinute)
                     {
                         conColor = ConsoleColor.Red;
-                        time = new DateTime();
+                        time = new TimeSpan(0, 0, 0);
                         isWorkTime = true;
                         Console.Beep(frequency, duration);
                     }
@@ -126,13 +147,14 @@ namespace Pomodoro
             if (isReadPrinciples) Console.WriteLine(strPrinciples);
             else if (isClocking)
             {
-                if (isPause) Console.Write(strClockingPause);
-                else Console.WriteLine(strClockingGo);
+                if (isPause) Console.WriteLine(strClockingPause);
+                else if(isBigBreak) Console.WriteLine(strClockingGo + '\n' + "Big break!");
+                else Console.WriteLine(strClockingGo + '\n');
                 Console.ForegroundColor = conColor;
-                Console.Write(GetTimeAsString(time.Minute, time.Second));
+                Console.Write(GetTimeAsString(time.Minutes, time.Seconds));
                 Console.ResetColor();
             }
-            else if (isGoingToExit) Console.WriteLine(strGointToExit);
+            else if (isGoingToExit) Console.WriteLine(strGoingToExit);
             else Console.WriteLine(strGreeting);
         }
 
@@ -150,7 +172,7 @@ namespace Pomodoro
                         if (!isClocking)
                         {
                             isClocking = true;
-                            timer.Start();
+                            lastTime = DateTime.Now;
                         }
                         break;
                     //P-p
@@ -163,8 +185,7 @@ namespace Pomodoro
                         if (isClocking)
                         {
                             isPause = !isPause;
-                            if (isPause) timer.Stop();
-                            else timer.Start();
+                            lastTime = DateTime.Now;
                         }
                         break;
                     //Y-y
@@ -187,7 +208,7 @@ namespace Pomodoro
                         {
                             isClocking = false;
                             isPause = false;
-                            time = new DateTime();
+                            time = new TimeSpan(0, 0, 0);
                         }
                         else if (isReadPrinciples) isReadPrinciples = false;
                         else isGoingToExit = true;
@@ -196,37 +217,30 @@ namespace Pomodoro
                         break;
                 }
                 UpdateText();
-
             }
         }
-
+   
         static void Main(string[] args)
         {
             Console.WriteLine("Loading");
             Thread readerReps = new Thread(LoadStrings);
-            readerReps.Start();
-            readerReps.Join();
             Thread readerSigns = new Thread(LoadSigns);
+            readerReps.Start();
             readerSigns.Start();
+            readerReps.Join();
             readerSigns.Join();
 
             Console.CursorVisible = false;
-            timer = new System.Timers.Timer(1000);
-            timer.Elapsed += (Object source, ElapsedEventArgs e) =>
-            {
-                if (!isPause)
-                {
-                    time = time.AddSeconds(1.0);
-                    UpdateText();
-                }
-            };
-            
+
             breaker.IsBackground = true;
             listener.IsBackground = true;
+            clocker.IsBackground = true;
             breaker.Start();
             listener.Start();
+            clocker.Start();
             UpdateText();
-            while (true) if (isExit && !isClocking) break;
+          
+            while (true) if (isExit) break;
         }
 
     }

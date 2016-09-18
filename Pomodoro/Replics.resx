@@ -126,14 +126,12 @@ Press "P" to see pomodoro principles
   </data>
   <data name="ClockingGo" xml:space="preserve">
     <value>Press Spacebar to pause clocking
-Press Esc to finish clocking and go to main menu
-</value>
+Press Esc to finish clocking and go to main menu</value>
   </data>
   <data name="ClockingPause" xml:space="preserve">
     <value>Press Spacebar to continue clocking
 Press Esc to finish clocking and go to main menu
-Paused
-</value>
+Paused</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Press Esc to go to main menu
@@ -161,6 +159,6 @@ that frequent breaks can improve mental agility.
 </value>
   </data>
   <data name="GoingToExit" xml:space="preserve">
-    <value>Are you reallu want to exit? (y/n)</value>
+    <value>Are you really want to exit? (y/n)</value>
   </data>
 </root>
