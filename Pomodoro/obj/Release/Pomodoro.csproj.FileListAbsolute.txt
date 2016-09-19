@@ -11,7 +11,6 @@ G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.exe
 G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.pdb
 G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\bin\Release\Pomodoro.exe
 G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\bin\Release\Pomodoro.pdb
-G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.csprojResolveAssemblyReference.cache
 G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.Replics.resources
 G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.Signs.resources
 G:\ОЛЕША\GitHub\Pomodoro\Pomodoro\obj\Release\Pomodoro.csproj.GenerateResource.Cache
